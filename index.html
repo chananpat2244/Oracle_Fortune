@@ -1,140 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Oracle Fortune</title>
+  <title>หน้าแรก | Oracle Fortune</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    .bg-pastel-pink { background-color: #F8C8DC; }
-    .bg-pastel-blue { background-color: #A7D9F0; }
-    .bg-pastel-green { background-color: #B4E0B4; }
-    .bg-pastel-yellow { background-color: #FDFD96; }
-    .bg-pastel-purple { background-color: #D8BFD8; }
-
-    @keyframes shake {
-      0% { transform: translateX(0); }
-      25% { transform: translateX(-3px); }
-      50% { transform: translateX(3px); }
-      75% { transform: translateX(-3px); }
-      100% { transform: translateX(0); }
-    }
-
-    .shake-animation {
-      animation: shake 0.2s ease-in-out;
-    }
-
-    .card-container {
-      perspective: 1000px;
-    }
-
-    .card-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      text-align: center;
-      transition: transform 0.6s;
-      transform-style: preserve-3d;
-    }
-
-    .card-front, .card-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      border-radius: 0.5rem;
-    }
-
-    .card-front {
-      transform: rotateY(180deg);
-    }
-
-    .card-inner.is-flipped {
-      transform: rotateY(180deg);
-    }
-  </style>
 </head>
+<body class="flex flex-col items-center justify-center min-h-screen bg-pastel-green">
 
-<body class="flex flex-col items-center justify-center min-h-screen bg-pastel-blue">
-  <div id="cardContainer" class="relative w-[95vw] h-[142.5vw] max-w-md max-h-[650px] bg-white rounded-lg shadow-xl overflow-hidden card-container">
-    <div id="cardInner" class="card-inner">
-      <div class="card-back">
-        <img id="cardBackImage" src="Make A Wish.gif" alt="Card Back" class="w-full h-full object-cover rounded-lg cursor-pointer">
-      </div>
-      <div class="card-front">
-        <img id="cardFrontImage" src="" alt="Card Front" class="w-full h-full object-cover rounded-lg cursor-pointer">
-      </div>
-    </div>
-  </div>
+  <h1 class="text-4xl font-bold text-pastel-purple mb-8">Oracle Fortune</h1>
 
-  <button id="refreshButton"
-    class="mt-6 px-4 py-2 bg-pastel-yellow text-black font-semibold rounded-lg shadow-md hover:bg-yellow-200 transition hidden">
-    🔮 เขย่าอีกครั้ง
-  </button>
-
-  <script>
-    const cardBackImage = document.getElementById('cardBackImage');
-    const cardInner = document.getElementById('cardInner');
-    const cardFrontImage = document.getElementById('cardFrontImage');
-    const refreshButton = document.getElementById('refreshButton');
-
-    const fontImages = [
-      '1.png','2.png','3.png','4.png','5.png','6.png','7.png','8.png','9.png','10.png',
-      '11.png','12.png','13.png','14.png','15.png','18.png','17.png','16.png','19.png','20.png',
-    ];
-
-    let currentFontImageName = '';
-
-    cardBackImage.addEventListener('click', () => {
-      if (cardInner.classList.contains('is-flipping') || cardInner.classList.contains('is-flipped')) return;
-
-      cardInner.classList.add('is-flipping');
-      cardBackImage.classList.add('shake-animation');
-
-      cardBackImage.addEventListener('animationend', function handler() {
-        cardBackImage.classList.remove('shake-animation');
-        cardBackImage.removeEventListener('animationend', handler);
-
-        if (!currentFontImageName) {
-          const randomIndex = Math.floor(Math.random() * fontImages.length);
-          currentFontImageName = fontImages[randomIndex];
-        }
-
-        cardFrontImage.src = `Font/${currentFontImageName}`;
-        cardInner.classList.add('is-flipped');
-
-        refreshButton.classList.remove('hidden');
-
-        cardInner.addEventListener('transitionend', function transitionEndHandler() {
-          cardInner.classList.remove('is-flipping');
-          cardInner.removeEventListener('transitionend', transitionEndHandler);
-        }, { once: true });
-      }, { once: true });
-    });
-
-    cardFrontImage.addEventListener('click', () => {
-      if (cardInner.classList.contains('is-flipping')) return;
-
-      if (cardInner.classList.contains('is-flipped')) {
-        cardInner.classList.add('is-flipping');
-
-        if (currentFontImageName) {
-          cardBackImage.src = `Back/${currentFontImageName}`;
-        } else {
-          cardBackImage.src = `Cover.png`;
-        }
-
-        cardInner.classList.remove('is-flipped');
-
-        cardInner.addEventListener('transitionend', function transitionEndHandler() {
-          cardInner.classList.remove('is-flipping');
-          cardInner.removeEventListener('transitionend', transitionEndHandler);
-        }, { once: true });
-      }
-    });
-    refreshButton.addEventListener('click', () => {
-      location.reload();
-    });
-  </script>
+  <a href="Main.html"
+     class="px-6 py-3 bg-pastel-yellow text-black font-semibold rounded-2xl shadow-lg hover:scale-105 transform transition">
+    🎴 ไปสุ่มไพ่เสี่ยงทาย
+  </a>
 </body>
 </html>
+
